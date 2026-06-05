@@ -908,12 +908,12 @@ tr:last-child td{border-bottom:none}
     </div>
   </div>
 
-  <!-- AVALIAÇÃO ANATÔMICA 8D -->
+  <!-- AVALIAÇÃO FÍSICA -->
   <div class="page" id="pg-eval">
     <div class="ph">
       <div class="ph-left">
-        <div class="ph-eyebrow" id="evalAlunoSubtitle">Aluno</div>
-        <div class="ph-title">AVALIAÇÃO <span>ANATÔMICA & POSTURAL 8D</span></div>
+        <div class="ph-eyebrow">Avaliação Física</div>
+        <div class="ph-title" id="evalAlunoSubtitle" style="font-size:2rem;color:var(--n7);text-shadow:0 0 18px rgba(85,133,232,0.35)">—</div>
       </div>
       <div class="ph-right" style="display:flex;gap:.3rem">
         <button type="button" class="btn btn-ghost btn-sm" onclick="voltarParaAlunos(event)">⬅ Voltar</button>
@@ -928,12 +928,36 @@ tr:last-child td{border-bottom:none}
         <div class="eval-history-list" id="evalHistoryList"></div>
       </div>
 
-      <!-- STAGE CORPO REALISTA -->
-      <div class="stage-3d" id="evalStageContainer" style="display:none">
+      <!-- STAGE CORPO DINÂMICO -->
+      <div class="stage-3d" id="evalStageContainer" style="display:none;height:auto;min-height:580px;padding-bottom:1rem;overflow:visible">
         <div style="position:absolute;top:12px;left:14px;font-family:'Bebas Neue';font-size:.9rem;letter-spacing:.15em;color:rgba(85,133,232,.7);pointer-events:none" id="ev-angle-label">FRENTE</div>
-        <div style="position:absolute;top:12px;right:14px;font-size:.5rem;letter-spacing:.18em;color:rgba(122,168,245,.6);background:rgba(4,10,22,.7);padding:3px 8px;border-radius:20px;border:1px solid rgba(46,90,191,.25);backdrop-filter:blur(8px);pointer-events:none" id="ev-gender-tag">♂ MASC</div>
+        <div style="position:absolute;top:12px;right:14px;font-size:.5rem;letter-spacing:.18em;color:rgba(122,168,245,.6);background:rgba(4,10,22,.7);padding:3px 8px;border-radius:20px;border:1px solid rgba(46,90,191,.25);backdrop-filter:blur(8px);pointer-events:none" id="ev-gender-tag">MASC</div>
+        <svg id="linesLayer" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:15;overflow:visible"></svg>
+        <style>
+        .mc{position:absolute;background:rgba(4,10,22,.93);border:1px solid rgba(85,133,232,.28);border-radius:10px;padding:6px 10px;min-width:96px;z-index:20;transition:border-color .2s,opacity .35s;pointer-events:none;opacity:0}
+        .mc.show{opacity:1;pointer-events:auto}
+        .mc-lbl{font-size:7.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(122,168,245,.55);margin-bottom:1px}
+        .mc-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#7aa8f5;line-height:1}
+        .mc-unit{font-size:10px;color:rgba(122,168,245,.4);margin-left:1px}
+        .mc-delta{font-size:8.5px;margin-top:1px}
+        .mc-dn{color:#22c55e}.mc-up{color:#ef4444}.mc-neu{color:rgba(122,168,245,.45)}
+        #linesLayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:15;overflow:visible}
+        </style>
 
-        <div style="position:relative;width:240px;height:400px" id="avatar-stage">
+        <!-- CARDS ESQUERDA -->
+        <div class="mc" id="mc-peso"    style="right:calc(50% + 128px);top:1%"><div class="mc-lbl">Peso</div><div class="mc-val" id="mcd-peso">—<span class="mc-unit">kg</span></div><div class="mc-delta mc-neu" id="mcd-imc">IMC —</div></div>
+        <div class="mc" id="mc-torax"   style="right:calc(50% + 128px);top:23%"><div class="mc-lbl">Tórax</div><div class="mc-val" id="mcd-torax">—<span class="mc-unit">cm</span></div><div class="mc-delta mc-neu" id="mcd-ombro">Ombro — cm</div></div>
+        <div class="mc" id="mc-cintura" style="right:calc(50% + 128px);top:43%"><div class="mc-lbl">Cintura</div><div class="mc-val" id="mcd-cintura">—<span class="mc-unit">cm</span></div><div class="mc-delta mc-neu" id="mcd-abd">Abdômen — cm</div></div>
+        <div class="mc" id="mc-coxa"    style="right:calc(50% + 128px);top:65%"><div class="mc-lbl">Coxa</div><div class="mc-val" id="mcd-coxa">—<span class="mc-unit">cm</span></div><div class="mc-delta mc-neu" id="mcd-perna">Perna — cm</div></div>
+
+        <!-- CARDS DIREITA -->
+        <div class="mc" id="mc-bf"      style="left:calc(50% + 128px);top:1%"><div class="mc-lbl">% Gordura</div><div class="mc-val" id="mcd-bf">—<span class="mc-unit">%</span></div><div class="mc-delta" id="mcd-bf-cls">—</div></div>
+        <div class="mc" id="mc-mm"      style="left:calc(50% + 128px);top:21%"><div class="mc-lbl">Massa Magra</div><div class="mc-val" id="mcd-mm">—<span class="mc-unit">kg</span></div><div class="mc-delta mc-neu" id="mcd-mg">Gorda — kg</div></div>
+        <div class="mc" id="mc-quadril" style="left:calc(50% + 128px);top:45%"><div class="mc-lbl">Quadril</div><div class="mc-val" id="mcd-quadril">—<span class="mc-unit">cm</span></div><div class="mc-delta mc-neu" id="mcd-rcq">RCQ —</div></div>
+        <div class="mc" id="mc-braco"   style="left:calc(50% + 128px);top:65%"><div class="mc-lbl">Braço Dir.</div><div class="mc-val" id="mcd-braco">—<span class="mc-unit">cm</span></div><div class="mc-delta mc-neu" id="mcd-braco-e">Esq. — cm</div></div>
+
+        <div style="position:relative;width:240px;height:420px;margin:0 auto" id="avatar-stage">
+        
           <!-- ===== MASCULINO FRENTE ===== -->
           <div class="body-view active" id="view-m-front" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
             <svg style="height:100%;filter:drop-shadow(0 0 18px rgba(46,90,191,.3));overflow:visible" viewBox="0 0 160 400">
@@ -942,15 +966,15 @@ tr:last-child td{border-bottom:none}
               <ellipse cx="80" cy="20" rx="14" ry="16" class="sk2" opacity=".4"/>
               <rect x="72" y="47" width="16" height="17" rx="3" class="sk"/>
               <line x1="76" y1="49" x2="76" y2="62" class="bl"/><line x1="84" y1="49" x2="84" y2="62" class="bl"/>
-              <path d="M72,63 C58,63 30,68 24,80 L30,82 C36,74 58,70 72,70Z" class="mu"/>
-              <path d="M88,63 C102,63 130,68 136,80 L130,82 C124,74 102,70 88,70Z" class="mu"/>
+              <path id="sv-shld-l" d="M72,63 C58,63 30,68 24,80 L30,82 C36,74 58,70 72,70Z" class="mu" style="transition:d .5s"/>
+              <path id="sv-shld-r" d="M88,63 C102,63 130,68 136,80 L130,82 C124,74 102,70 88,70Z" class="mu" style="transition:d .5s"/>
               <path d="M72,65 C65,63 50,62 36,68" class="ct"/><path d="M88,65 C95,63 110,62 124,68" class="ct"/>
-              <ellipse cx="28" cy="84" rx="12" ry="14" transform="rotate(-10,28,84)" class="mu"/>
-              <ellipse cx="132" cy="84" rx="12" ry="14" transform="rotate(10,132,84)" class="mu"/>
-              <path d="M40,80 C52,77 70,80 72,100 C60,104 42,100 36,90Z" class="mu"/>
-              <path d="M120,80 C108,77 90,80 88,100 C100,104 118,100 124,90Z" class="mu"/>
+              <ellipse id="sv-arm-l" cx="28" cy="84" rx="12" ry="14" transform="rotate(-10,28,84)" class="mu" style="transition:rx .5s"/>
+              <ellipse id="sv-arm-r" cx="132" cy="84" rx="12" ry="14" transform="rotate(10,132,84)" class="mu" style="transition:rx .5s"/>
+              <path id="sv-pec-l" d="M40,80 C52,77 70,80 72,100 C60,104 42,100 36,90Z" class="mu" style="transition:d .5s"/>
+              <path id="sv-pec-r" d="M120,80 C108,77 90,80 88,100 C100,104 118,100 124,90Z" class="mu" style="transition:d .5s"/>
               <line x1="80" y1="68" x2="80" y2="130" class="bl"/>
-              <path d="M68,100 L72,165 L88,165 L92,100Z" class="mu"/>
+              <path id="sv-trunk" d="M68,100 L72,165 L88,165 L92,100Z" class="mu" style="transition:d .5s"/>
               <line x1="70" y1="113" x2="90" y2="113" class="bl"/><line x1="70" y1="128" x2="90" y2="128" class="bl"/>
               <line x1="70" y1="143" x2="90" y2="143" class="bl"/><line x1="80" y1="100" x2="80" y2="165" class="bl"/>
               <path d="M60,100 L68,100 L72,165 L54,160Z" class="sk2"/><path d="M100,100 L92,100 L88,165 L106,160Z" class="sk2"/>
@@ -962,14 +986,14 @@ tr:last-child td{border-bottom:none}
               <ellipse cx="143" cy="186" rx="6" ry="10" class="sk2"/>
               <path d="M54,162 C48,160 36,166 32,178 L52,182Z" class="sk"/>
               <path d="M106,162 C112,160 124,166 128,178 L108,182Z" class="sk"/>
-              <path d="M52,180 C44,188 40,220 46,260 L64,260 C62,222 62,190 72,175Z" class="mu"/>
+              <path id="sv-thigh-l" d="M52,180 C44,188 40,220 46,260 L64,260 C62,222 62,190 72,175Z" class="mu" style="transition:d .5s"/>
               <path d="M54,200 C56,210 58,230 58,250" class="ct" opacity=".5"/>
-              <path d="M108,180 C116,188 120,220 114,260 L96,260 C98,222 98,190 88,175Z" class="mu"/>
+              <path id="sv-thigh-r" d="M108,180 C116,188 120,220 114,260 L96,260 C98,222 98,190 88,175Z" class="mu" style="transition:d .5s"/>
               <path d="M106,200 C104,210 102,230 102,250" class="ct" opacity=".5"/>
               <ellipse cx="55" cy="264" rx="9" ry="7" class="sk" opacity=".6"/>
               <ellipse cx="105" cy="264" rx="9" ry="7" class="sk" opacity=".6"/>
-              <path d="M46,260 C40,278 40,300 48,318 L60,318 C56,302 54,280 64,260Z" class="sk2"/>
-              <path d="M114,260 C120,278 120,300 112,318 L100,318 C104,302 106,280 96,260Z" class="sk2"/>
+              <path id="sv-shin-l" d="M46,260 C40,278 40,300 48,318 L60,318 C56,302 54,280 64,260Z" class="sk2" style="transition:d .5s"/>
+              <path id="sv-shin-r" d="M114,260 C120,278 120,300 112,318 L100,318 C104,302 106,280 96,260Z" class="sk2" style="transition:d .5s"/>
               <path d="M48,318 C46,330 48,338 54,340 L60,340 C62,338 62,330 60,318Z" class="sk2"/>
               <path d="M112,318 C114,330 112,338 106,340 L100,340 C98,338 98,330 100,318Z" class="sk2"/>
               <ellipse cx="53" cy="348" rx="10" ry="7" class="sk2"/>
@@ -1193,23 +1217,31 @@ tr:last-child td{border-bottom:none}
         <!-- Subescapular só 7D -->
         <div class="fg" id="f-subscapular" style="display:none"><label class="fl">Subescapular</label><input type="number" step="0.1" class="fi" id="dSubescapular" oninput="calculateMetrics()"></div>
 
-        <!-- CIRCUNFERÊNCIAS -->
-        <div class="eval-block-title">📐 Circunferências (cm)</div>
+        <!-- PERIMETRIA -->
+        <div class="eval-block-title">📐 Perimetria (cm)</div>
         <div class="frow">
-          <div class="fg"><label class="fl">Tórax</label><input type="number" step="0.1" class="fi" id="cTorax"></div>
-          <div class="fg"><label class="fl">Cintura</label><input type="number" step="0.1" class="fi" id="cCintura"></div>
+          <div class="fg"><label class="fl">Pescoço</label><input type="number" step="0.1" class="fi" id="cPescoco" oninput="updateBodyScan()"></div>
+          <div class="fg"><label class="fl">Ombro</label><input type="number" step="0.1" class="fi" id="cOmbro" oninput="updateBodyScan()"></div>
         </div>
         <div class="frow">
-          <div class="fg"><label class="fl">Abdômen</label><input type="number" step="0.1" class="fi" id="cAbdomen"></div>
-          <div class="fg"><label class="fl">Quadril</label><input type="number" step="0.1" class="fi" id="cQuadril"></div>
+          <div class="fg"><label class="fl">Tórax</label><input type="number" step="0.1" class="fi" id="cTorax" oninput="updateBodyScan()"></div>
+          <div class="fg"><label class="fl">Cintura</label><input type="number" step="0.1" class="fi" id="cCintura" oninput="calculateMetrics()"></div>
         </div>
         <div class="frow">
-          <div class="fg"><label class="fl">Braço D. (C)</label><input type="number" step="0.1" class="fi" id="cBrcDC"></div>
-          <div class="fg"><label class="fl">Braço D. (R)</label><input type="number" step="0.1" class="fi" id="cBrcDR"></div>
+          <div class="fg"><label class="fl">Abdômen</label><input type="number" step="0.1" class="fi" id="cAbdomen" oninput="updateBodyScan()"></div>
+          <div class="fg"><label class="fl">Quadril</label><input type="number" step="0.1" class="fi" id="cQuadril" oninput="calculateMetrics()"></div>
         </div>
         <div class="frow">
-          <div class="fg"><label class="fl">Coxa D.</label><input type="number" step="0.1" class="fi" id="cCxaDR"></div>
-          <div class="fg"><label class="fl">Panturrilha D.</label><input type="number" step="0.1" class="fi" id="cPanturrilha"></div>
+          <div class="fg"><label class="fl">Braço Esq.</label><input type="number" step="0.1" class="fi" id="cBrcEC" oninput="updateBodyScan()"></div>
+          <div class="fg"><label class="fl">Braço Dir.</label><input type="number" step="0.1" class="fi" id="cBrcDC" oninput="updateBodyScan()"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label class="fl">Coxa Esq.</label><input type="number" step="0.1" class="fi" id="cCxaE" oninput="updateBodyScan()"></div>
+          <div class="fg"><label class="fl">Coxa Dir.</label><input type="number" step="0.1" class="fi" id="cCxaDR" oninput="updateBodyScan()"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label class="fl">Perna Esq.</label><input type="number" step="0.1" class="fi" id="cPernaE" oninput="updateBodyScan()"></div>
+          <div class="fg"><label class="fl">Perna Dir.</label><input type="number" step="0.1" class="fi" id="cPernaD" oninput="updateBodyScan()"></div>
         </div>
 
         <!-- RESULTADOS -->
@@ -1219,6 +1251,19 @@ tr:last-child td{border-bottom:none}
           <div class="hud-card"><div class="hud-label">Massa Magra</div><div class="hud-value" id="val-lm">—</div></div>
           <div class="hud-card"><div class="hud-label">Massa Gorda</div><div class="hud-value" id="val-fm">—</div></div>
           <div class="hud-card"><div class="hud-label">Densidade</div><div class="hud-value" id="val-density" style="font-size:13px">—</div></div>
+        </div>
+        <div class="hud-metrics" style="margin-top:8px">
+          <div class="hud-card"><div class="hud-label">IMC</div><div class="hud-value" id="val-imc" style="font-size:20px">—</div><div class="hud-label" id="val-imc-class" style="margin-top:2px;font-size:8px;color:var(--ylw)"></div></div>
+          <div class="hud-card"><div class="hud-label">RCQ</div><div class="hud-value" id="val-rcq" style="font-size:20px">—</div><div class="hud-label" id="val-rcq-class" style="margin-top:2px;font-size:8px;color:var(--grn)"></div></div>
+          <div class="hud-card"><div class="hud-label">Soma Dobras</div><div class="hud-value" id="val-soma" style="font-size:20px">—</div><div class="hud-label" style="margin-top:2px">mm</div></div>
+          <div class="hud-card"><div class="hud-label">Soma Perim.</div><div class="hud-value" id="val-somaperim" style="font-size:18px">—</div><div class="hud-label" style="margin-top:2px">cm</div></div>
+        </div>
+
+        <!-- OUTROS -->
+        <div class="eval-block-title">📋 Outros</div>
+        <div class="frow">
+          <div class="fg"><label class="fl">% Gordura Proposta</label><input type="number" step="0.1" class="fi" id="evBfMeta" placeholder="Ex: 14"></div>
+          <div class="fg"><label class="fl">Próxima Avaliação</label><input type="date" class="fi" id="evProxAvaliacao"></div>
         </div>
 
         <!-- AVALIAÇÃO POSTURAL -->
@@ -1356,7 +1401,7 @@ tr:last-child td{border-bottom:none}
         <div class="fg" id="fgModoManual" style="display:none"><label class="fl">Descrição manual *</label><input class="fi" id="pgModoManualTxt"></div>
       </div>
       <div class="frow">
-        <div class="fg"><label class="fl">Vencimento *</label><input type="date" class="fi" id="pgVc"></div>
+        <div class="fg"><label class="fl">Vencimento *</label><input type="date" class="fi" id="pgVc" onchange="autoStatusPorVencimento()"></div>
         <div class="fg"><label class="fl">Status</label><select class="fs" id="pgSt"><option value="pendente">Pendente</option><option value="pago">Pago</option><option value="atrasado">Atrasado</option></select></div>
       </div>
       <!-- RECORRÊNCIA -->
@@ -1644,7 +1689,7 @@ function abrirAvaliacoes(alunoId) {
   isEvalDraft = false;
   localStorage.setItem('sm_selected_aluno_id', alunoId);
   const al = DB.alunos.find(a => a.id === alunoId);
-  if(al) g('evalAlunoSubtitle').textContent = al.nm;
+  if(al) g('evalAlunoSubtitle').textContent = al.nm.toUpperCase();
   go('eval');
 
   const ultima = DB.avaliacoes
@@ -1927,6 +1972,17 @@ function openPG(){
   g('mPG').classList.add('open');
 }
 
+function autoStatusPorVencimento() {
+  const stEl = g('pgSt');
+  if (!stEl) return;
+  // Só atualiza automático se não estiver pago
+  if (stEl.value === 'pago') return;
+  const vc = v('pgVc');
+  if (!vc) return;
+  const d = diff(vc);
+  if (d !== null) stEl.value = d < 0 ? 'atrasado' : 'pendente';
+}
+
 function svPG(evt){
   evt?.preventDefault?.();
   const alId=v('pgAl'), vl=v('pgVl'); if(!alId||!vl) return toast('Preencha os campos',true);
@@ -2070,7 +2126,7 @@ function novaAvaliacao(evt) {
     if (al) {
       selectedAlunoId = al.id;
       localStorage.setItem('sm_selected_aluno_id', al.id);
-      g('evalAlunoSubtitle').textContent = al.nm;
+      g('evalAlunoSubtitle').textContent = al.nm.toUpperCase();
     }
   }
   if (!selectedAlunoId) { toast('Selecione um aluno primeiro', true); return; }
@@ -2082,7 +2138,9 @@ function novaAvaliacao(evt) {
   g('evPeso').value = ''; g('evAltura').value = ''; g('evAge').value = '25';
   g('evGender').value = 'M';
   ['dPeitoral','dAbdominal','dCoxa','dTriceps','dSuprailiaca','dAxilar','dSubescapular'].forEach(id => { const el=g(id); if(el) el.value=''; });
-  ['cTorax','cCintura','cBrcDC','cCxaDR'].forEach(id => { const el=g(id); if(el) el.value=''; });
+  ['cPescoco','cOmbro','cTorax','cCintura','cAbdomen','cQuadril','cBrcEC','cBrcDC','cCxaE','cCxaDR','cPernaE','cPernaD'].forEach(id => { const el=g(id); if(el) el.value=''; });
+  if(g('evBfMeta')) g('evBfMeta').value='';
+  if(g('evProxAvaliacao')) g('evProxAvaliacao').value='';
   g('val-bf').textContent='0.0%'; g('val-lm').textContent='0.0 kg'; g('val-fm').textContent='0.0 kg'; g('val-density').textContent='0.0000';
   g('evalStageContainer').style.display = 'flex';
   g('evalContentForm').style.display = 'block';
@@ -2108,7 +2166,11 @@ function carregarAvaliacao(id) {
   g('evAge').value = av.idade || '25';
   g('evGender').value = av.genero || 'M';
   ['dPeitoral','dAbdominal','dCoxa','dTriceps','dSuprailiaca','dAxilar','dSubescapular'].forEach(id => { const el=g(id); if(el) el.value=av[id]||''; });
-  ['cTorax','cCintura','cBrcDC','cCxaDR'].forEach(id => { const el=g(id); if(el) el.value=av[id]||''; });
+  ['cPescoco','cOmbro','cTorax','cCintura','cAbdomen','cQuadril','cBrcEC','cBrcDC','cCxaE','cCxaDR','cPernaE','cPernaD'].forEach(id => { const el=g(id); if(el) el.value=av[id]||''; });
+  if(g('evBfMeta')) g('evBfMeta').value = av.evBfMeta||'';
+  if(g('evProxAvaliacao')) g('evProxAvaliacao').value = av.evProxAvaliacao||'';
+  if(g('posGlobal') && av.posGlobal) g('posGlobal').value = av.posGlobal;
+  if(g('posObs')) g('posObs').value = av.posObs||'';
   g('evalStageContainer').style.display = 'flex';
   g('evalContentForm').style.display = 'block';
   g('evalEmptyState').style.display = 'none';
@@ -2116,6 +2178,7 @@ function carregarAvaliacao(id) {
   hideSkinFoldPopover();
   updateGenderAvatar();
   calculateMetrics();
+  setTimeout(drawScanLines, 150);
   rHistoryEval();
 }
 
@@ -2133,7 +2196,13 @@ function salvarAvaliacao(evt) {
     genero: g('evGender').value,
     dPeitoral: v('dPeitoral'), dAbdominal: v('dAbdominal'), dCoxa: v('dCoxa'),
     dTriceps: v('dTriceps'), dSuprailiaca: v('dSuprailiaca'), dAxilar: v('dAxilar'), dSubescapular: v('dSubescapular'),
-    cTorax: v('cTorax'), cCintura: v('cCintura'), cBrcDC: v('cBrcDC'), cCxaDR: v('cCxaDR')
+    cPescoco: v('cPescoco'), cOmbro: v('cOmbro'),
+    cTorax: v('cTorax'), cCintura: v('cCintura'), cAbdomen: v('cAbdomen'), cQuadril: v('cQuadril'),
+    cBrcEC: v('cBrcEC'), cBrcDC: v('cBrcDC'),
+    cCxaE: v('cCxaE'), cCxaDR: v('cCxaDR'),
+    cPernaE: v('cPernaE'), cPernaD: v('cPernaD'),
+    evBfMeta: v('evBfMeta'), evProxAvaliacao: v('evProxAvaliacao'),
+    posGlobal: g('posGlobal').value, posObs: v('posObs')
   };
   let avs = DB.avaliacoes;
   if (v('evalId')) avs = avs.map(a => a.id === payload.id ? payload : a);
@@ -2181,11 +2250,13 @@ function calculateMetrics() {
   let density = 0, bf = 0;
   if (activeProto === '3d' && pc && pa && pco) {
     const soma = pc + pa + pco;
+    // Pollock 1978 — 3 dobras
     if (genero === 'M') density = 1.10938 - 0.0008267*soma + 0.0000016*soma*soma - 0.0002574*idade;
     else density = 1.0994921 - 0.0009929*soma + 0.0000023*soma*soma - 0.0001392*idade;
     bf = (4.95/density - 4.50)*100;
   } else if (activeProto === '7d' && pc && pa && pco && ptr && psi && pax && pse) {
     const soma = pc + pa + pco + ptr + psi + pax + pse;
+    // Pollock 1984 — 7 dobras (coeficientes originais)
     if (genero === 'M') density = 1.112 - 0.00043499*soma + 0.00000055*soma*soma - 0.00028826*idade;
     else density = 1.097 - 0.00046971*soma + 0.00000056*soma*soma - 0.00012828*idade;
     bf = (4.95/density - 4.50)*100;
@@ -2193,10 +2264,39 @@ function calculateMetrics() {
   if (bf < 0) bf = 0;
   const fm = peso * (bf/100);
   const lm = peso - fm;
-  g('val-bf').textContent = bf.toFixed(1)+'%';
-  g('val-lm').textContent = lm.toFixed(1)+' kg';
-  g('val-fm').textContent = fm.toFixed(1)+' kg';
-  g('val-density').textContent = density ? density.toFixed(4) : '0.0000';
+  g('val-bf').textContent = bf > 0 ? bf.toFixed(1)+'%' : '—';
+  g('val-lm').textContent = lm > 0 ? lm.toFixed(1)+' kg' : '—';
+  g('val-fm').textContent = fm > 0 ? fm.toFixed(1)+' kg' : '—';
+  g('val-density').textContent = density ? density.toFixed(4) : '—';
+
+  // IMC
+  if (peso > 0 && altura > 0) {
+    const altM = altura / 100;
+    const imc = peso / (altM * altM);
+    let cls = imc < 18.5 ? 'Abaixo do Peso' : imc < 25 ? 'Peso Normal' : imc < 30 ? 'Sobrepeso' : imc < 35 ? 'Obesidade I' : imc < 40 ? 'Obesidade II' : 'Obesidade III';
+    g('val-imc').textContent = imc.toFixed(2);
+    g('val-imc-class').textContent = cls;
+  } else { g('val-imc').textContent='—'; g('val-imc-class').textContent=''; }
+
+  // RCQ
+  const cintura = parseFloat(g('cCintura')?.value || 0);
+  const quadril = parseFloat(g('cQuadril')?.value || 0);
+  if (cintura > 0 && quadril > 0) {
+    const rcq = cintura / quadril;
+    const clsRCQ = genero === 'M' ? (rcq < 0.9 ? 'Baixo' : rcq < 0.95 ? 'Moderado' : 'Alto') : (rcq < 0.8 ? 'Baixo' : rcq < 0.85 ? 'Moderado' : 'Alto');
+    g('val-rcq').textContent = rcq.toFixed(2);
+    g('val-rcq-class').textContent = clsRCQ;
+  } else { g('val-rcq').textContent='—'; g('val-rcq-class').textContent=''; }
+
+  // Soma dobras
+  const somaD = [pc, pa, pco, ptr, psi, pax, pse].filter(v=>v>0).reduce((s,v)=>s+v, 0);
+  g('val-soma').textContent = somaD > 0 ? somaD.toFixed(1) : '—';
+
+  // Soma perimetria
+  const perimFields = ['cPescoco','cOmbro','cTorax','cCintura','cAbdomen','cQuadril','cBrcEC','cBrcDC','cCxaE','cCxaDR','cPernaE','cPernaD'];
+  const somaP = perimFields.map(id=>parseFloat(g(id)?.value||0)).filter(v=>v>0).reduce((s,v)=>s+v,0);
+  g('val-somaperim').textContent = somaP > 0 ? somaP.toFixed(1) : '—';
+  updateBodyScan();
 }
 
 function updateGenderAvatar() {
@@ -2305,6 +2405,268 @@ function loadPhoto(input, viewId) {
   };
   reader.readAsDataURL(file);
 }
+
+
+// ============================================================
+// BODY SCAN — morph dinâmico do avatar + metric cards
+// ============================================================
+
+// Valores de referência para escala do SVG (homem médio brasileiro)
+// Cintura ref: 88cm, Tórax ref: 96cm, Quadril ref: 96cm, Coxa ref: 54cm, Braço ref: 34cm
+const BODY_REF = {cintura:88, torax:96, quadril:96, coxa:54, braco:34, perna:38};
+
+// Pontos de ancoragem no SVG (cx%, cy% do avatar-stage 240x420)
+// Usados para desenhar as linhas dos metric cards
+const ANCHORS = {
+  'mc-peso':      {x:0.50, y:0.07},
+  'mc-torax':     {x:0.50, y:0.26},
+  'mc-cintura':   {x:0.50, y:0.37},
+  'mc-coxa-l':    {x:0.35, y:0.64},
+  'mc-bf':        {x:0.50, y:0.12},
+  'mc-mm':        {x:0.50, y:0.29},
+  'mc-quadril-r': {x:0.50, y:0.46},
+  'mc-braco':     {x:0.22, y:0.22},
+};
+
+function updateBodyScan() {
+  const peso    = parseFloat(g('evPeso')?.value)   || 0;
+  const altura  = parseFloat(g('evAltura')?.value) || 0;
+  const cintura = parseFloat(g('cCintura')?.value) || 0;
+  const abdomen = parseFloat(g('cAbdomen')?.value) || 0;
+  const quadril = parseFloat(g('cQuadril')?.value) || 0;
+  const torax   = parseFloat(g('cTorax')?.value)   || 0;
+  const ombro   = parseFloat(g('cOmbro')?.value)   || 0;
+  const coxa    = parseFloat(g('cCxaDR')?.value)   || 0;
+  const pernaD  = parseFloat(g('cPernaD')?.value)  || 0;
+  const bracoD  = parseFloat(g('cBrcDC')?.value)   || 0;
+  const bracoE  = parseFloat(g('cBrcEC')?.value)   || 0;
+
+  // % gordura do calculateMetrics já foi computado, lê do HUD
+  const bfTxt = g('val-bf')?.textContent || '0%';
+  const bf    = parseFloat(bfTxt) || 0;
+  const fm    = peso * (bf/100);
+  const lm    = peso - fm;
+
+  // IMC
+  let imcStr = '—', imcCls = 'mc-neu';
+  if (peso > 0 && altura > 0) {
+    const altM = altura/100;
+    const imc  = peso/(altM*altM);
+    imcStr = 'IMC ' + imc.toFixed(1);
+    imcCls = imc >= 30 ? 'mc-up' : imc >= 25 ? 'mc-up' : 'mc-dn';
+  }
+
+  // RCQ
+  let rcqStr = 'RCQ —';
+  if (cintura > 0 && quadril > 0) {
+    const gen = g('evGender')?.value || 'M';
+    const rcq = cintura/quadril;
+    const risk = gen==='M' ? (rcq<0.9?'Baixo':rcq<0.95?'Moderado':'Alto') : (rcq<0.8?'Baixo':rcq<0.85?'Moderado':'Alto');
+    rcqStr = 'RCQ ' + rcq.toFixed(2) + ' · ' + risk;
+  }
+
+  // Classifica BF
+  let bfClsStr = '—', bfClsCls = 'mc-neu';
+  if (bf > 0) {
+    const gen = g('evGender')?.value || 'M';
+    const cls = gen==='M'
+      ? (bf<6?'Essencial':bf<14?'Atlético':bf<18?'Boa forma':bf<25?'Normal':'Acima')
+      : (bf<14?'Essencial':bf<21?'Atlético':bf<25?'Boa forma':bf<32?'Normal':'Acima');
+    bfClsStr = cls;
+    bfClsCls = bf > (gen==='M'?25:32) ? 'mc-up' : bf < (gen==='M'?6:14) ? 'mc-neu' : 'mc-dn';
+  }
+
+  // ——— Atualiza textos dos cards ———
+  const set = (id, val) => { const el=g(id); if(el) el.innerHTML=val; };
+
+  set('mcd-peso',    peso > 0 ? peso.toFixed(1)+'<span class="mc-unit">kg</span>' : '—');
+  set('mcd-imc',     '<span class="'+imcCls+'">'+imcStr+'</span>');
+  set('mcd-torax',   torax  > 0 ? torax.toFixed(0)+'<span class="mc-unit">cm</span>' : '—');
+  set('mcd-ombro',   'Ombro ' + (ombro>0 ? ombro.toFixed(0)+' cm' : '—'));
+  set('mcd-cintura', cintura> 0 ? cintura.toFixed(0)+'<span class="mc-unit">cm</span>' : '—');
+  set('mcd-abd',     'Abdômen ' + (abdomen>0 ? abdomen.toFixed(0)+' cm' : '—'));
+  set('mcd-coxa',    coxa   > 0 ? coxa.toFixed(0)+'<span class="mc-unit">cm</span>' : '—');
+  set('mcd-perna',   'Perna ' + (pernaD>0 ? pernaD.toFixed(0)+' cm' : '—'));
+  set('mcd-bf',      bf     > 0 ? bf.toFixed(1)+'<span class="mc-unit">%</span>' : '—');
+  const bfEl = g('mcd-bf-cls'); if(bfEl){ bfEl.textContent=bfClsStr; bfEl.className='mc-delta '+bfClsCls; }
+  set('mcd-mm',      lm     > 0 ? lm.toFixed(1)+'<span class="mc-unit">kg</span>' : '—');
+  set('mcd-mg',      'Gorda ' + (fm>0 ? fm.toFixed(1)+' kg' : '—'));
+  set('mcd-quadril', quadril> 0 ? quadril.toFixed(0)+'<span class="mc-unit">cm</span>' : '—');
+  set('mcd-rcq',     rcqStr);
+  set('mcd-braco',   bracoD > 0 ? bracoD.toFixed(0)+'<span class="mc-unit">cm</span>' : '—');
+  set('mcd-braco-e', 'Esq. ' + (bracoE>0 ? bracoE.toFixed(0)+' cm' : '—'));
+
+  // ——— Mostra/oculta cards conforme dados disponíveis ———
+  const show = (id, cond) => {
+    const el = g(id); if(!el) return;
+    el.classList.toggle('show', cond);
+  };
+  show('mc-peso',     peso>0);
+  show('mc-torax',    torax>0 || ombro>0);
+  show('mc-cintura',  cintura>0 || abdomen>0);
+  show('mc-coxa-l',   coxa>0 || pernaD>0);
+  show('mc-bf',       bf>0);
+  show('mc-mm',       lm>0);
+  show('mc-quadril-r',quadril>0);
+  show('mc-braco',    bracoD>0 || bracoE>0);
+
+  // ——— Morph do SVG ———
+  morphBody({cintura, torax, quadril, coxa, braco:bracoD||bracoE, perna:pernaD, bf});
+
+  // ——— Linhas de conexão ———
+  drawScanLines();
+}
+
+function morphBody({cintura, torax, quadril, coxa, braco, perna, bf}) {
+  // Escala: valor medido / referência → fator de expansão
+  // Clampado entre 0.75 e 1.35 para não deformar demais
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const scaleOf = (val, ref) => val > 0 ? clamp(val/ref, 0.78, 1.38) : 1;
+
+  const sC = scaleOf(cintura, BODY_REF.cintura); // escala cintura/abdômen
+  const sT = scaleOf(torax, BODY_REF.torax);     // escala tórax/ombro
+  const sQ = scaleOf(quadril, BODY_REF.quadril); // escala quadril
+  const sCx= scaleOf(coxa, BODY_REF.coxa);       // escala coxa
+  const sB = scaleOf(braco, BODY_REF.braco);     // escala braço
+  const sP = scaleOf(perna, BODY_REF.perna);     // escala perna
+
+  // Cor do corpo baseada em % gordura
+  // bf < 14: azul musculoso (#1a2d5a)
+  // bf 14-25: normal (#162550)
+  // bf > 25: mais claro/arredondado (#1f3570)
+  const bodyColor = bf <= 0   ? '#162550'
+    : bf < 14 ? '#12204a'
+    : bf < 20 ? '#162550'
+    : bf < 28 ? '#1c2e5e'
+    : '#243572';
+
+  // Aplica cor muscular
+  document.querySelectorAll('#view-m-front .mu').forEach(el => {
+    el.style.fill = bodyColor;
+  });
+
+  // ——— TRONCO: escala horizontal em torno do centro X=80 ———
+  const trunk = g('sv-trunk');
+  if (trunk) {
+    const hw = 10 * sC; // half-width base é ~10 (de 70 a 90 = ±10)
+    const cx = 80;
+    trunk.setAttribute('d',
+      `M${cx-hw-2},100 L${cx-hw+2},165 L${cx+hw-2},165 L${cx+hw+2},100Z`
+    );
+  }
+
+  // ——— OMBROS / PEITO ———
+  const shldL = g('sv-shld-l');
+  const shldR = g('sv-shld-r');
+  if (shldL && shldR) {
+    const ext = 44 * sT; // extensão lateral (de 80 até 80-44=36 no ponto extremo)
+    shldL.setAttribute('d', `M72,63 C60,63 ${80-ext},68 ${80-ext+8},80 L${80-ext+14},82 C${80-ext+20},74 62,70 72,70Z`);
+    shldR.setAttribute('d', `M88,63 C100,63 ${80+ext},68 ${80+ext-8},80 L${80+ext-14},82 C${80+ext-20},74 98,70 88,70Z`);
+  }
+
+  // ——— PEITORAL / LAT ———
+  const pecL = g('sv-pec-l');
+  const pecR = g('sv-pec-r');
+  if (pecL && pecR) {
+    const tw = 14 * sT; // largura do peitoral
+    pecL.setAttribute('d', `M${80-tw-6},80 C${80-tw+2},77 ${80-8},80 ${80-8},100 C${80-14},104 ${80-tw},100 ${80-tw-4},90Z`);
+    pecR.setAttribute('d', `M${80+tw+6},80 C${80+tw-2},77 ${80+8},80 ${80+8},100 C${80+14},104 ${80+tw},100 ${80+tw+4},90Z`);
+  }
+
+  // ——— COXAS ———
+  const thighL = g('sv-thigh-l');
+  const thighR = g('sv-thigh-r');
+  if (thighL && thighR) {
+    const qw = 12 * sQ; // largura do quadril no topo da coxa
+    const cw = 9  * sCx; // largura da coxa na base
+    thighL.setAttribute('d',
+      `M${80-qw},180 C${80-qw-6},190 ${80-cw-8},222 ${80-cw-6},260 L${80-cw+6},260 C${80-cw+4},222 ${80-cw+4},192 ${80-8},175Z`
+    );
+    thighR.setAttribute('d',
+      `M${80+qw},180 C${80+qw+6},190 ${80+cw+8},222 ${80+cw+6},260 L${80+cw-6},260 C${80+cw-4},222 ${80+cw-4},192 ${80+8},175Z`
+    );
+  }
+
+  // ——— PERNAS ———
+  const shinL = g('sv-shin-l');
+  const shinR = g('sv-shin-r');
+  if (shinL && shinR) {
+    const pw = 7 * sP;
+    shinL.setAttribute('d',
+      `M${80-pw-8},260 C${80-pw-12},278 ${80-pw-12},300 ${80-pw-4},318 L${80-pw+6},318 C${80-pw+2},302 ${80-pw},280 ${80-pw+4},260Z`
+    );
+    shinR.setAttribute('d',
+      `M${80+pw+8},260 C${80+pw+12},278 ${80+pw+12},300 ${80+pw+4},318 L${80+pw-6},318 C${80+pw-2},302 ${80+pw},280 ${80+pw-4},260Z`
+    );
+  }
+
+  // ——— BRAÇOS ———
+  const armL = g('sv-arm-l');
+  const armR = g('sv-arm-r');
+  if (armL) armL.setAttribute('rx', (12 * sB).toFixed(1));
+  if (armR) armR.setAttribute('rx', (12 * sB).toFixed(1));
+}
+
+function drawScanLines() {
+  const lyr = g('linesLayer');
+  const stage = g('evalStageContainer');
+  if (!lyr || !stage) return;
+  const sRect = stage.getBoundingClientRect();
+  if (sRect.width === 0) return;
+  lyr.innerHTML = '';
+
+  const aStage = g('avatar-stage');
+  if (!aStage) return;
+  const aRect = aStage.getBoundingClientRect();
+  const aOffX = aRect.left - sRect.left;
+  const aOffY = aRect.top  - sRect.top;
+  const AW = aRect.width, AH = aRect.height;
+
+  const pairs = [
+    ['mc-peso',     {x:0.50,y:0.06}],
+    ['mc-torax',    {x:0.45,y:0.25}],
+    ['mc-cintura',  {x:0.50,y:0.37}],
+    ['mc-coxa-l',   {x:0.33,y:0.63}],
+    ['mc-bf',       {x:0.55,y:0.12}],
+    ['mc-mm',       {x:0.50,y:0.30}],
+    ['mc-quadril-r',{x:0.52,y:0.46}],
+    ['mc-braco',    {x:0.20,y:0.22}],
+  ];
+
+  pairs.forEach(([cardId, anch]) => {
+    const card = g(cardId);
+    if (!card || !card.classList.contains('show')) return;
+    const cr = card.getBoundingClientRect();
+    if (cr.width === 0) return;
+
+    const bx = aOffX + anch.x * AW;
+    const by = aOffY + anch.y * AH;
+    // Card center relative to stage
+    const cx = cr.left - sRect.left + cr.width/2;
+    const cy = cr.top  - sRect.top  + cr.height/2;
+
+    const mx = (bx + cx) / 2;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', `M${bx},${by} C${mx},${by} ${mx},${cy} ${cx},${cy}`);
+    path.setAttribute('stroke','rgba(85,133,232,0.35)');
+    path.setAttribute('stroke-width','1');
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke-dasharray','3,3');
+    lyr.appendChild(path);
+
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx', bx); dot.setAttribute('cy', by);
+    dot.setAttribute('r','3');
+    dot.setAttribute('fill','rgba(122,168,245,0.75)');
+    lyr.appendChild(dot);
+  });
+}
+
+// Re-desenha linhas ao redimensionar
+window.addEventListener('resize', () => {
+  if (g('evalStageContainer')?.style.display !== 'none') drawScanLines();
+});
 
 window.onload=function(){
   if(g('cfgPin')) {
