@@ -21,7 +21,21 @@
       .sidebar { padding-bottom: env(safe-area-inset-bottom); height: calc(64px + env(safe-area-inset-bottom)); }
       .main { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
     }
-  </style>
+  
+/* WhatsApp billing automation */
+.wa-billing-panel{border:1px solid rgba(34,197,94,.22);background:linear-gradient(135deg,rgba(4,18,14,.92),rgba(6,16,30,.86));border-radius:var(--r);padding:.85rem;margin:0 0 .8rem;box-shadow:0 18px 42px rgba(0,0,0,.22)}
+.wa-billing-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;margin-bottom:.72rem}
+.wa-billing-title{font-family:var(--font-display);font-size:1.35rem;letter-spacing:.08em;color:#86efac;text-transform:uppercase}
+.wa-billing-sub{font-size:.68rem;line-height:1.55;color:var(--muted);margin-top:.15rem}
+.wa-billing-actions{display:flex;gap:.45rem;flex-wrap:wrap}
+.btn-wa-bulk{border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.09);color:#bbf7d0;border-radius:12px;padding:.48rem .62rem;font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.btn-wa-bulk:hover{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.55)}
+.btn-wa{background:rgba(34,197,94,.12)!important;border-color:rgba(34,197,94,.38)!important;color:#86efac!important;font-size:.58rem!important;font-weight:900!important;min-width:34px!important}
+.btn-wa.no-phone{opacity:.42;filter:grayscale(.5)}
+.wa-small-note{font-size:.58rem;color:rgba(187,247,208,.72);line-height:1.45;margin-top:.55rem}
+@media(max-width:760px){.wa-billing-head{display:block}.wa-billing-actions{margin-top:.7rem}.btn-wa-bulk{flex:1}}
+
+</style>
 <title>Sthefano Marques — Sistema Supremo PRO v3</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -830,6 +844,173 @@ tr:last-child td{border-bottom:none}
   border-radius:10px;color:rgba(74,96,136,.7);font-size:.78rem;
 }
 
+/* AVALIACAO ORGANIZADA v4 */
+#pg-eval .ph{align-items:flex-start}
+#pg-eval .ph-right{justify-content:flex-end}
+#pg-eval .eval-grid{grid-template-columns:minmax(180px,230px) minmax(520px,1fr);align-items:start}
+#pg-eval .eval-sidebar{position:sticky;top:72px}
+#pg-eval #evalContentForm{max-height:calc(100vh - 76px);overflow:auto}
+#evalContentForm.scanner-drawer{position:fixed;top:56px;right:0;bottom:0;width:min(430px,calc(100vw - 18px));max-height:none!important;border-radius:14px 0 0 14px!important;z-index:1600;transform:translateX(106%);transition:transform .24s ease,box-shadow .24s ease;box-shadow:-24px 0 60px rgba(0,0,0,.42)!important}
+#evalContentForm.scanner-drawer.open{transform:translateX(0)}
+.scanner-scrim{position:fixed;inset:0;background:rgba(2,6,14,.55);z-index:1550;display:none;backdrop-filter:blur(3px)}
+.scanner-scrim.open{display:block}
+.scanner-drawer-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.7rem;padding-bottom:.65rem;border-bottom:1px solid rgba(46,90,191,.2)}
+.scanner-drawer-title{font-family:'Bebas Neue';font-size:1.25rem;letter-spacing:.08em;color:var(--n7)}
+.scanner-close{width:30px;height:30px;border-radius:7px;border:1px solid rgba(85,133,232,.25);background:rgba(5,12,28,.84);color:var(--w2);cursor:pointer;font-weight:800}
+#evalContentForm{scrollbar-width:thin;scrollbar-color:rgba(85,133,232,.55) transparent}
+#evalContentForm .tabs{position:sticky;top:0;z-index:8;background:linear-gradient(180deg,rgba(6,14,30,.98),rgba(6,14,30,.86));padding:.35rem 0 .55rem;margin:-.25rem 0 .65rem;backdrop-filter:blur(10px)}
+#evalContentForm .frow{gap:.45rem}
+#evalContentForm .fg{margin-bottom:.55rem}
+#evalContentForm .fl{font-size:.52rem;color:rgba(122,168,245,.75)}
+#evalContentForm .fi,#evalContentForm .fs,#evalContentForm .fta{min-height:34px;padding:.43rem .58rem;border-color:rgba(64,112,212,.42);background:rgba(5,12,28,.86)}
+.eval-form-quick{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.65rem}
+.eval-form-quick .fg{margin-bottom:0}
+.eval-fold{border:1px solid rgba(46,90,191,.24);border-radius:9px;background:rgba(5,12,28,.48);margin:.55rem 0;overflow:hidden}
+.eval-fold[open]{background:linear-gradient(160deg,rgba(7,16,34,.74),rgba(5,12,28,.54));box-shadow:0 10px 28px rgba(0,0,0,.16)}
+.eval-fold summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.62rem .72rem;cursor:pointer;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(122,168,245,.86);font-weight:800;border-bottom:1px solid transparent}
+.eval-fold[open] summary{border-bottom-color:rgba(46,90,191,.16)}
+.eval-fold summary::-webkit-details-marker{display:none}
+.eval-fold summary::after{content:'+';font-family:'Bebas Neue';font-size:1.05rem;color:rgba(122,168,245,.75);line-height:1}
+.eval-fold[open] summary::after{content:'-'}
+.eval-fold-body{padding:.68rem .72rem .78rem}
+.eval-fold-body .hud-metrics:first-child{margin-top:0}
+.eval-actions{position:sticky;bottom:0;z-index:9;background:linear-gradient(0deg,rgba(6,14,30,.98),rgba(6,14,30,.82));backdrop-filter:blur(10px);border-top:1px solid rgba(46,90,191,.22)!important;margin:1rem -.9rem -.9rem!important;padding:.75rem .9rem!important}
+#evalStageContainer{isolation:isolate;cursor:grab;touch-action:pan-y;user-select:none}
+#evalStageContainer.dragging{cursor:grabbing}
+#evalStageContainer .avatar-container{z-index:3;transform-origin:center bottom;transition:transform .28s ease,filter .28s ease}
+#evalStageContainer .body-svg{transition:transform .28s ease,filter .28s ease}
+#evalStageContainer.morph-soft .body-svg{filter:drop-shadow(0 0 22px rgba(85,133,232,.34))}
+#evalStageContainer.morph-strong .body-svg{filter:drop-shadow(0 0 28px rgba(249,115,22,.32))}
+#evalStageContainer #avatar-stage{z-index:5;transform-origin:center bottom;transition:transform .28s ease,filter .28s ease}
+#evalStageContainer .mc{max-width:128px}
+#evalStageContainer .mc.show{pointer-events:none}
+.eval-vitals{position:absolute;inset:48px 24px 58px;z-index:2;pointer-events:none}
+.eval-vital{position:absolute;width:132px;min-height:74px;padding:.7rem .75rem;border-radius:10px;border:1px solid rgba(85,133,232,.28);background:linear-gradient(160deg,rgba(5,12,28,.86),rgba(7,15,34,.72));box-shadow:0 12px 30px rgba(0,0,0,.26),inset 0 1px 0 rgba(122,168,245,.08);backdrop-filter:blur(10px)}
+.eval-vital::after{content:"";position:absolute;top:50%;width:72px;border-top:1px dashed rgba(122,168,245,.25)}
+.eval-vital.left::after{left:100%}
+.eval-vital.right::after{right:100%}
+.eval-vital b{display:block;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(122,168,245,.7);margin-bottom:.22rem}
+.eval-vital strong{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;line-height:1;color:var(--n7);letter-spacing:.03em}
+.eval-vital span{display:block;font-size:.62rem;color:rgba(139,163,204,.72);margin-top:.2rem;line-height:1.25}
+.eval-vital .down{color:var(--grn)} .eval-vital .up{color:var(--red)}
+.ev-vital-peso{left:0;top:0}.ev-vital-cintura{left:0;top:42%}.ev-vital-coxa{left:0;bottom:0}
+.ev-vital-bf{right:0;top:4%}.ev-vital-imc{right:0;top:36%}.ev-vital-quadril{right:0;bottom:9%}
+.eval-stage-footer{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);z-index:4;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(122,168,245,.5);background:rgba(3,8,16,.72);border:1px solid rgba(46,90,191,.22);border-radius:999px;padding:.28rem .7rem;white-space:nowrap}
+
+@media(max-width:1180px){
+  #pg-eval .eval-grid{grid-template-columns:minmax(180px,220px) minmax(0,1fr)}
+  #evalStageContainer .mc{min-width:88px;max-width:108px;padding:5px 8px}
+  #evalStageContainer .mc-val{font-size:18px}
+  #evalStageContainer .mc-delta{font-size:8px}
+  #evalStageContainer #avatar-stage{width:220px!important;height:390px!important}
+  #evalStageContainer .mc[style*="calc(50% + 128px)"][style*="right"]{right:calc(50% + 108px)!important}
+  #evalStageContainer .mc[style*="calc(50% + 128px)"][style*="left"]{left:calc(50% + 108px)!important}
+}
+@media(max-width:760px){
+  #pg-eval .ph-right{justify-content:flex-start}
+  #pg-eval .eval-grid{grid-template-columns:1fr}
+  #pg-eval .eval-sidebar{position:relative;top:auto}
+  .eval-form-quick{grid-template-columns:1fr}
+  #evalContentForm.scanner-drawer{top:0;width:100vw;border-radius:0!important}
+  #evalStageContainer{min-height:760px!important;padding:1rem .75rem 1.4rem!important;justify-content:flex-start!important}
+  #evalStageContainer .avatar-container{width:min(220px,58vw)!important;height:360px!important;margin-top:.4rem}
+  #evalStageContainer #avatar-stage{width:min(220px,62vw)!important;height:360px!important;margin-top:.8rem!important}
+  #evalStageContainer #avatar-stage{order:1}
+  #evalStageContainer .mc{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;min-width:0;max-width:none;width:auto;opacity:1}
+  #evalStageContainer .mc{order:3;width:100%}
+  #evalStageContainer .mc:not(.show){display:none}
+  #evalStageContainer .mc.show{display:block}
+  #evalStageContainer .mc::after{display:none}
+  #evalStageContainer #linesLayer{display:none}
+  #evalStageContainer{display:flex;flex-direction:column}
+  #evalStageContainer .mc.show:nth-of-type(n){order:3}
+  #evalStageContainer::after{width:240px;height:65px}
+  #evalStageContainer .stage-controls{order:2;position:relative;top:auto;bottom:auto;margin-top:.35rem}
+  #evalStageContainer #skinFoldPopover{z-index:60}
+  #evalStageContainer .mc.show{margin:.25rem 0}
+  #evalStageContainer .mc.show + .mc.show{margin-top:.25rem}
+  #evalStageContainer .mc-grid-mobile{display:grid}
+  .eval-vitals{position:relative;inset:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;width:100%;order:3;margin-top:.8rem;pointer-events:none}
+  .eval-vital{position:relative!important;inset:auto!important;width:auto;min-height:68px}
+  .eval-vital::after{display:none}
+  .eval-vital strong{font-size:1.4rem}
+  .stage-controls{bottom:auto;top:410px}
+  .eval-stage-footer{position:relative;left:auto;bottom:auto;transform:none;order:4;margin-top:.7rem}
+  .skinfold-popover{max-width:calc(100vw - 32px)}
+}
+@media(max-width:420px){
+  .eval-vitals{grid-template-columns:1fr}
+  #evalStageContainer{min-height:980px!important}
+  #evalStageContainer #avatar-stage{width:min(200px,70vw)!important;height:335px!important}
+}
+
+/* V5 FAST HOLOGRAM SCANNER */
+#evalStageContainer{contain:layout paint;cursor:grab;touch-action:pan-y;user-select:none;background:radial-gradient(ellipse 48% 50% at 50% 42%,rgba(45,82,170,.22),transparent 70%),linear-gradient(180deg,#030810,#061022 48%,#030810)!important}
+#evalStageContainer.dragging{cursor:grabbing}
+#evalStageContainer::before{animation:none!important;background-image:linear-gradient(rgba(46,90,191,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(46,90,191,.035) 1px,transparent 1px)!important;background-size:44px 44px!important}
+#evalStageContainer::after{height:82px!important;background:radial-gradient(ellipse,rgba(85,133,232,.18),transparent 70%)!important}
+#evalStageContainer #linesLayer{display:none!important}
+#evalStageContainer #avatar-stage{z-index:8;transform-origin:center bottom;will-change:transform}
+#evalStageContainer #avatar-stage::before{content:'';position:absolute;left:50%;top:6%;width:210px;height:210px;transform:translateX(-50%);border:1px solid rgba(85,133,232,.18);border-radius:50%;box-shadow:0 0 40px rgba(85,133,232,.12);pointer-events:none}
+#evalStageContainer #avatar-stage::after{content:'';position:absolute;left:50%;bottom:1%;width:170px;height:34px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(85,133,232,.24),transparent 72%);filter:blur(2px);pointer-events:none}
+#evalStageContainer .body-view svg{filter:none!important;opacity:.92}
+#evalStageContainer .body-view::before{content:'';position:absolute;left:50%;top:7%;width:2px;height:82%;transform:translateX(-50%);background:linear-gradient(180deg,transparent,rgba(122,168,245,.22),transparent);box-shadow:0 0 18px rgba(85,133,232,.3);pointer-events:none}
+#evalStageContainer .mu,#evalStageContainer .sk,#evalStageContainer .sk2{stroke-width:.65!important}
+#evalStageContainer .mc{max-width:126px;pointer-events:none;box-shadow:none!important;backdrop-filter:none!important}
+#evalStageContainer .mc::after{display:none}
+#evalStageContainer .mc.show{opacity:.94}
+.hotspot-ring-outer,.hotspot-ring-mid,.hotspot-purple .hotspot-ring-mid{animation:none!important}
+.hotspot-ring-outer{opacity:.42}
+.hotspot-ring-mid{box-shadow:0 0 9px rgba(239,68,68,.55)!important}
+.hotspot.active-spot .hotspot-ring-mid{box-shadow:0 0 14px rgba(34,197,94,.75)!important}
+.hud-value{filter:none!important}
+.eval-stage-footer{bottom:52px!important;background:rgba(3,8,16,.68)!important}
+.scanner-orbit{position:absolute;left:50%;top:50%;width:min(48vw,420px);aspect-ratio:1;transform:translate(-50%,-50%) rotateX(68deg);border:1px solid rgba(85,133,232,.2);border-radius:50%;z-index:1;pointer-events:none;box-shadow:0 0 32px rgba(85,133,232,.08)}
+.scanner-orbit::before,.scanner-orbit::after{content:'';position:absolute;inset:14%;border:1px solid rgba(122,168,245,.12);border-radius:50%}
+.scanner-orbit::after{inset:31%;border-color:rgba(239,68,68,.16)}
+.scanner-beam{position:absolute;left:50%;top:13%;width:min(240px,55vw);height:72%;transform:translateX(-50%);z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(85,133,232,.08),transparent);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);opacity:.65}
+
+@media(max-width:760px){
+  #evalStageContainer{min-height:720px!important}
+  #evalStageContainer .mc{box-shadow:none!important}
+}
+
+/* V6: detalhes sem lag + avatar holografico novo */
+#evalContentForm.scanner-drawer{display:none!important;transform:none!important;transition:none!important;box-shadow:-12px 0 30px rgba(0,0,0,.28)!important}
+#evalContentForm.scanner-drawer.open{display:block!important}
+.scanner-scrim{background:rgba(2,6,14,.28)!important;backdrop-filter:none!important}
+#evalContentForm .tabs,.eval-actions{backdrop-filter:none!important}
+.skinfold-popover{backdrop-filter:none!important}
+#evalStageContainer .body-view svg{opacity:1!important}
+#evalStageContainer .sk{fill:rgba(44,86,180,.24)!important;stroke:rgba(122,168,245,.86)!important;stroke-width:.9!important}
+#evalStageContainer .sk2{fill:rgba(28,52,112,.22)!important;stroke:rgba(85,133,232,.55)!important;stroke-width:.75!important}
+#evalStageContainer .mu{fill:rgba(28,64,146,.26)!important;stroke:rgba(85,133,232,.72)!important;stroke-width:.82!important}
+#evalStageContainer .ct{stroke:rgba(122,168,245,.36)!important}
+#evalStageContainer .bl{stroke:rgba(122,168,245,.22)!important}
+#evalStageContainer .body-view.active svg{filter:none!important}
+#evalStageContainer #avatar-stage::before{width:235px;height:235px;top:2%;border-color:rgba(122,168,245,.16);box-shadow:none}
+#evalStageContainer #avatar-stage::after{height:26px;background:radial-gradient(ellipse,rgba(122,168,245,.2),transparent 68%);filter:none}
+#evalStageContainer .body-view::before{width:1px;background:linear-gradient(180deg,transparent,rgba(122,168,245,.32),transparent);box-shadow:none}
+.scanner-orbit{box-shadow:none!important;border-color:rgba(122,168,245,.18)!important}
+.scanner-beam{opacity:.42!important;background:linear-gradient(90deg,transparent,rgba(122,168,245,.06),transparent)!important}
+.hotspot-ring-mid{background:rgba(239,68,68,.08)!important;border-color:rgba(255,96,116,.86)!important}
+.hotspot.active-spot .hotspot-ring-mid{background:rgba(34,197,94,.11)!important;border-color:rgba(74,222,128,.9)!important}
+
+.postural-panel{margin-top:.85rem;border:1px solid rgba(46,90,191,.24);border-radius:10px;background:rgba(5,12,28,.52);padding:.72rem}
+.postural-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.65rem;margin-bottom:.65rem}
+.postural-title{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(122,168,245,.9)}
+.postural-sub{font-size:.62rem;color:rgba(139,163,204,.62);line-height:1.35;margin-top:.18rem}
+.postural-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;margin-bottom:.65rem}
+.postural-tab{border:1px solid rgba(64,112,212,.34);background:rgba(4,10,22,.72);color:rgba(139,163,204,.82);border-radius:6px;padding:.45rem .35rem;font-size:.56rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.postural-tab.active{background:rgba(46,90,191,.24);border-color:rgba(122,168,245,.48);color:var(--w)}
+.postural-checkgrid{display:grid;grid-template-columns:1fr;gap:.35rem}
+.postural-check{display:grid;grid-template-columns:18px 1fr;gap:.45rem;align-items:start;padding:.45rem .5rem;border:1px solid rgba(46,90,191,.16);border-radius:7px;background:rgba(4,10,22,.42)}
+.postural-check input{margin-top:2px;accent-color:var(--n6)}
+.postural-check b{display:block;font-size:.62rem;color:rgba(237,242,255,.9);line-height:1.25}
+.postural-check span{display:block;font-size:.56rem;color:rgba(139,163,204,.62);line-height:1.35;margin-top:.08rem}
+.postural-note{margin-top:.65rem}
+.postural-warning{font-size:.58rem;line-height:1.45;color:rgba(245,158,11,.82);border:1px solid rgba(245,158,11,.18);background:rgba(245,158,11,.06);border-radius:7px;padding:.5rem;margin-top:.65rem}
+
 </style>
 </head>
 <body>
@@ -918,6 +1099,7 @@ tr:last-child td{border-bottom:none}
       <div class="ph-right" style="display:flex;gap:.3rem">
         <button type="button" class="btn btn-ghost btn-sm" onclick="voltarParaAlunos(event)">⬅ Voltar</button>
         <button type="button" class="btn btn-primary btn-sm" onclick="novaAvaliacao(event)">+ Nova Ficha</button>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="toggleEvalPanel(event)">☰ Detalhes</button>
       </div>
     </div>
 
@@ -929,9 +1111,11 @@ tr:last-child td{border-bottom:none}
       </div>
 
       <!-- STAGE CORPO DINÂMICO -->
-      <div class="stage-3d" id="evalStageContainer" style="display:none;height:auto;min-height:580px;padding-bottom:1rem;overflow:visible">
+      <div class="stage-3d" id="evalStageContainer" style="display:none;height:auto;min-height:580px;padding-bottom:1rem;overflow:visible" onpointerdown="startAvatarDrag(event)" onpointermove="moveAvatarDrag(event)" onpointerup="endAvatarDrag(event)" onpointercancel="endAvatarDrag(event)">
         <div style="position:absolute;top:12px;left:14px;font-family:'Bebas Neue';font-size:.9rem;letter-spacing:.15em;color:rgba(85,133,232,.7);pointer-events:none" id="ev-angle-label">FRENTE</div>
         <div style="position:absolute;top:12px;right:14px;font-size:.5rem;letter-spacing:.18em;color:rgba(122,168,245,.6);background:rgba(4,10,22,.7);padding:3px 8px;border-radius:20px;border:1px solid rgba(46,90,191,.25);backdrop-filter:blur(8px);pointer-events:none" id="ev-gender-tag">MASC</div>
+        <div class="scanner-orbit"></div>
+        <div class="scanner-beam"></div>
         <svg id="linesLayer" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:15;overflow:visible"></svg>
         <style>
         .mc{position:absolute;background:rgba(4,10,22,.93);border:1px solid rgba(85,133,232,.28);border-radius:10px;padding:6px 10px;min-width:96px;z-index:20;transition:border-color .2s,opacity .35s;pointer-events:none;opacity:0}
@@ -1174,10 +1358,15 @@ tr:last-child td{border-bottom:none}
           <button type="button" class="btn-ctrl" id="btn-side" onclick="rotateTo('side', event)">PERFIL</button>
           <button type="button" class="btn-ctrl" id="btn-back" onclick="rotateTo('back', event)">COSTAS</button>
         </div>
+        <div class="eval-stage-footer" id="evalStageFooter">Pollock 7D — arraste para girar</div>
       </div><!-- /stage -->
 
       <!-- FORMULÁRIO COMPLETO -->
       <div style="background:linear-gradient(160deg,#060e1e,#070d1a);border:1px solid rgba(46,90,191,.2);border-radius:10px;padding:.9rem;display:none;box-shadow:0 0 30px rgba(46,90,191,.05)" id="evalContentForm">
+        <div class="scanner-drawer-head">
+          <div class="scanner-drawer-title">Detalhes da Avaliação</div>
+          <button type="button" class="scanner-close" onclick="closeEvalPanel(event)">×</button>
+        </div>
         <input type="hidden" id="evalId">
 
         <!-- Tabs protocolo -->
@@ -1306,6 +1495,27 @@ tr:last-child td{border-bottom:none}
           </div>
         </div>
 
+        <div class="postural-panel">
+          <div class="postural-head">
+            <div>
+              <div class="postural-title">Análise postural por foto</div>
+              <div class="postural-sub">Checklist técnico visual para registrar achados e gerar relatório de acompanhamento.</div>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="gerarRelatorioPostural()">Gerar Texto</button>
+          </div>
+          <div class="postural-tabs">
+            <button type="button" class="postural-tab active" data-postural-tab="front" onclick="showPosturalTab('front')">Frente</button>
+            <button type="button" class="postural-tab" data-postural-tab="back" onclick="showPosturalTab('back')">Costas</button>
+            <button type="button" class="postural-tab" data-postural-tab="right" onclick="showPosturalTab('right')">Lateral D.</button>
+            <button type="button" class="postural-tab" data-postural-tab="left" onclick="showPosturalTab('left')">Lateral E.</button>
+          </div>
+          <div class="postural-body" id="posturalBody"></div>
+          <div class="fg" style="margin-top:.75rem">
+            <label class="fl">Relatório Postural Consolidado</label>
+            <textarea class="fta" id="posturalReport" rows="7" placeholder="O relatório técnico será gerado a partir dos checklists e observações por foto."></textarea>
+          </div>
+        </div>
+
         <div style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:1.2rem;border-top:1px solid var(--bg4);padding-top:.8rem">
           <button type="button" class="btn btn-danger btn-sm" id="btnDelEval" onclick="deletarAvaliacao(event)" style="margin-right:auto;display:none">Excluir</button>
           <button type="button" class="btn btn-primary" onclick="salvarAvaliacao(event)">💾 Salvar Avaliação</button>
@@ -1330,6 +1540,21 @@ tr:last-child td{border-bottom:none}
     </div>
     <div id="pgKpis" style="display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-bottom:1rem"></div>
     <div id="pgAlertaAtraso" style="display:none;margin-bottom:.8rem"></div>
+    <div class="wa-billing-panel" id="waBillingPanel">
+      <div class="wa-billing-head">
+        <div>
+          <div class="wa-billing-title">Cobranças WhatsApp</div>
+          <div class="wa-billing-sub">Usa o WhatsApp cadastrado no aluno para abrir a conversa com a mensagem da fatura pronta.</div>
+        </div>
+        <div class="wa-billing-actions">
+          <button class="btn-wa-bulk" onclick="enviarCobrancasWhatsApp('atrasado')">Atrasados</button>
+          <button class="btn-wa-bulk" onclick="enviarCobrancasWhatsApp('hoje')">Vence hoje</button>
+          <button class="btn-wa-bulk" onclick="enviarCobrancasWhatsApp('proximos7')">Próx. 7 dias</button>
+          <button class="btn-wa-bulk" onclick="enviarCobrancasWhatsApp('pendente')">Todos pendentes</button>
+        </div>
+      </div>
+      <div class="wa-small-note">Cadastre o telefone no aluno em formato DDD + número. Ex: 16999999999.</div>
+    </div>
     <div class="fin-tabs" id="tabsP">
       <button class="fin-tab active" onclick="fP('todos',this)">Todos</button>
       <button class="fin-tab" onclick="fP('pendente',this)">Pendentes</button>
@@ -1472,6 +1697,7 @@ tr:last-child td{border-bottom:none}
     </div>
   </div>
 </div>
+<div class="scanner-scrim" id="evalPanelScrim" onclick="closeEvalPanel(event)"></div>
 <div class="toasts" id="toasts"></div>
 
 <script>
@@ -1522,6 +1748,7 @@ const diasBadge = d => {
 };
 
 let FA='todos', FP='todos', selectedAlunoId=null, currentEvalId=null, currentAngle='front', activeProto='3d', isEvalDraft=false, activeSkinFoldField=null;
+let avatarDrag = {active:false, startX:0, startY:0, moved:false};
 let isPrivacyHidden = true; 
 let currentTypedPin = '';
 let targetAuthCallback = null;
@@ -1939,7 +2166,7 @@ function rPag(){
       <div class="pay-right">
         <div class="pay-valor">${R$(p.vl)}</div>
         <div class="pay-actions">
-          ${p.st!=='pago'?`<button class="btn-baixa btn-baixa-ok" title="Dar baixa" onclick="darBaixa('${p.id}')">✓</button>`:''}
+          ${p.st!=='pago'?`<button class="btn-baixa btn-baixa-ok" title="Dar baixa" onclick="darBaixa('${p.id}')">✓</button><button class="btn-baixa btn-wa ${temWhatsAppAluno(p.alId,p.al)?'':'no-phone'}" title="Cobrar no WhatsApp" onclick="enviarFaturaWhatsApp('${p.id}')">WA</button>`:''}
           <button class="btn-baixa btn-baixa-edit" title="Editar" onclick="editarPagamento('${p.id}')">✏</button>
           <button class="btn-baixa btn-baixa-del" title="Remover" onclick="delPG('${p.id}')">✕</button>
         </div>
@@ -2008,6 +2235,87 @@ function svPG(evt){
     toast(recMeses>1 ? recMeses+' faturas geradas!' : 'Salvo!');
   }
   DB.pagamentos=arr; cm('mPG'); rPag(); rDash();
+}
+
+
+function alunoDoPagamento(p){
+  if(!p) return null;
+  return DB.alunos.find(a=>a.id===p.alId) || DB.alunos.find(a=>(a.nm||'')===(p.al||'')) || null;
+}
+function limparTelefoneWhatsApp(raw){
+  let n = String(raw||'').replace(/\D/g,'');
+  if(!n) return '';
+  if(n.startsWith('00')) n=n.slice(2);
+  if(!n.startsWith('55') && (n.length===10 || n.length===11)) n='55'+n;
+  return n;
+}
+function temWhatsAppAluno(alId, nome){
+  const al = DB.alunos.find(a=>a.id===alId) || DB.alunos.find(a=>(a.nm||'')===(nome||''));
+  return !!limparTelefoneWhatsApp(al?.wa);
+}
+function statusCobrancaPagamento(p){
+  if(!p || p.st==='pago') return 'pago';
+  const d = diff(p.vc);
+  if(d!==null && d<0) return 'atrasado';
+  if(d===0) return 'hoje';
+  return 'pendente';
+}
+function mensagemFaturaWhatsApp(p){
+  const al = alunoDoPagamento(p);
+  const nome = (al?.nm || p.al || 'aluno').split(' ')[0];
+  const plano = p.modo==='outro' ? (p.modoManual||'treino') : (p.modo||'treino');
+  const valor = R$(p.vl);
+  const venc = fDt(p.vc);
+  const st = statusCobrancaPagamento(p);
+  const desc = p.ds ? ' ('+p.ds+')' : '';
+  if(st==='atrasado') return 'Olá, '+nome+'! Tudo bem? Passando para lembrar que sua fatura de '+plano+desc+', no valor de '+valor+', venceu em '+venc+'. Me chama por aqui para regularizarmos, por favor.';
+  if(st==='hoje') return 'Olá, '+nome+'! Tudo bem? Sua fatura de '+plano+desc+', no valor de '+valor+', vence hoje ('+venc+'). Qualquer dúvida me chama por aqui.';
+  return 'Olá, '+nome+'! Tudo bem? Lembrete da sua fatura de '+plano+desc+', no valor de '+valor+', com vencimento em '+venc+'. Já deixei registrado aqui para facilitar.';
+}
+function linkFaturaWhatsApp(p){
+  const al = alunoDoPagamento(p);
+  const numero = limparTelefoneWhatsApp(al?.wa);
+  if(!numero) return '';
+  return 'https://wa.me/'+numero+'?text='+encodeURIComponent(mensagemFaturaWhatsApp(p));
+}
+async function copiarMensagemFatura(id){
+  const p = DB.pagamentos.find(x=>x.id===id);
+  if(!p) return toast('Fatura não encontrada', true);
+  const msg = mensagemFaturaWhatsApp(p);
+  try{ await navigator.clipboard.writeText(msg); toast('Mensagem copiada!'); }
+  catch(e){ prompt('Copie a mensagem:', msg); }
+}
+function enviarFaturaWhatsApp(id, silencioso=false){
+  const p = DB.pagamentos.find(x=>x.id===id);
+  if(!p){ if(!silencioso) toast('Fatura não encontrada', true); return false; }
+  const al = alunoDoPagamento(p);
+  const link = linkFaturaWhatsApp(p);
+  if(!link){
+    if(!silencioso) toast('Cadastre o WhatsApp de '+(al?.nm || p.al || 'aluno')+' primeiro', true);
+    return false;
+  }
+  window.open(link, '_blank');
+  return true;
+}
+function filtrarCobrancasWhatsApp(tipo){
+  return DB.pagamentos.filter(p=>p.st!=='pago').filter(p=>{
+    const d = diff(p.vc);
+    if(tipo==='atrasado') return p.st==='atrasado' || (d!==null && d<0);
+    if(tipo==='hoje') return d===0;
+    if(tipo==='proximos7') return d!==null && d>=0 && d<=7;
+    if(tipo==='pendente') return p.st==='pendente' || p.st==='atrasado';
+    return false;
+  }).sort((a,b)=>new Date(a.vc)-new Date(b.vc));
+}
+function enviarCobrancasWhatsApp(tipo){
+  const lista = filtrarCobrancasWhatsApp(tipo);
+  if(!lista.length) return toast('Nenhuma cobrança encontrada para esse filtro');
+  const comTelefone = lista.filter(p=>!!linkFaturaWhatsApp(p));
+  const semTelefone = lista.length - comTelefone.length;
+  if(!comTelefone.length) return toast('Nenhum aluno desse filtro tem WhatsApp cadastrado', true);
+  toast('Abrindo '+comTelefone.length+' conversa'+(comTelefone.length>1?'s':'')+' no WhatsApp'+(semTelefone?' ('+semTelefone+' sem telefone)':''));
+  comTelefone.slice(0,12).forEach((p,i)=>setTimeout(()=>enviarFaturaWhatsApp(p.id,true), i*850));
+  if(comTelefone.length>12) setTimeout(()=>toast('Abri as 12 primeiras para o navegador não bloquear tudo'), 1200);
 }
 
 function darBaixa(id){ DB.pagamentos=DB.pagamentos.map(p=>p.id===id?{...p,st:'pago'}:p); rPag(); toast('Baixa confirmada!'); }
@@ -2118,6 +2426,31 @@ function voltarParaAlunos(evt) {
   go('alunos');
 }
 
+function openEvalPanel(evt){
+  evt?.preventDefault?.();
+  const panel = g('evalContentForm');
+  if(!panel) return;
+  panel.style.display = 'block';
+  panel.classList.add('scanner-drawer','open');
+  g('evalPanelScrim')?.classList.add('open');
+}
+
+function closeEvalPanel(evt){
+  evt?.preventDefault?.();
+  const panel = g('evalContentForm');
+  panel?.classList.remove('open');
+  if(panel) panel.style.display = 'none';
+  g('evalPanelScrim')?.classList.remove('open');
+}
+
+function toggleEvalPanel(evt){
+  evt?.preventDefault?.();
+  const panel = g('evalContentForm');
+  if(!panel) return;
+  if(panel.classList.contains('open')) closeEvalPanel(evt);
+  else openEvalPanel(evt);
+}
+
 function novaAvaliacao(evt) {
   evt?.preventDefault?.();
   if (!selectedAlunoId) {
@@ -2141,9 +2474,16 @@ function novaAvaliacao(evt) {
   ['cPescoco','cOmbro','cTorax','cCintura','cAbdomen','cQuadril','cBrcEC','cBrcDC','cCxaE','cCxaDR','cPernaE','cPernaD'].forEach(id => { const el=g(id); if(el) el.value=''; });
   if(g('evBfMeta')) g('evBfMeta').value='';
   if(g('evProxAvaliacao')) g('evProxAvaliacao').value='';
+  if(g('posObs')) g('posObs').value='';
+  if(g('posturalReport')) g('posturalReport').value='';
+  posturalState = {};
+  currentPosturalView = 'front';
+  showPosturalTab('front');
   g('val-bf').textContent='0.0%'; g('val-lm').textContent='0.0 kg'; g('val-fm').textContent='0.0 kg'; g('val-density').textContent='0.0000';
   g('evalStageContainer').style.display = 'flex';
   g('evalContentForm').style.display = 'block';
+  g('evalContentForm').classList.add('scanner-drawer');
+  closeEvalPanel();
   g('evalEmptyState').style.display = 'none';
   g('btnDelEval').style.display = 'none';
   hideSkinFoldPopover();
@@ -2171,14 +2511,17 @@ function carregarAvaliacao(id) {
   if(g('evProxAvaliacao')) g('evProxAvaliacao').value = av.evProxAvaliacao||'';
   if(g('posGlobal') && av.posGlobal) g('posGlobal').value = av.posGlobal;
   if(g('posObs')) g('posObs').value = av.posObs||'';
+  showPosturalTab('front');
+  setPosturalData(av.posturalData || {});
   g('evalStageContainer').style.display = 'flex';
   g('evalContentForm').style.display = 'block';
+  g('evalContentForm').classList.add('scanner-drawer');
+  closeEvalPanel();
   g('evalEmptyState').style.display = 'none';
   g('btnDelEval').style.display = '';
   hideSkinFoldPopover();
   updateGenderAvatar();
   calculateMetrics();
-  setTimeout(drawScanLines, 150);
   rHistoryEval();
 }
 
@@ -2202,7 +2545,8 @@ function salvarAvaliacao(evt) {
     cCxaE: v('cCxaE'), cCxaDR: v('cCxaDR'),
     cPernaE: v('cPernaE'), cPernaD: v('cPernaD'),
     evBfMeta: v('evBfMeta'), evProxAvaliacao: v('evProxAvaliacao'),
-    posGlobal: g('posGlobal').value, posObs: v('posObs')
+    posGlobal: g('posGlobal').value, posObs: v('posObs'),
+    posturalData: getPosturalData()
   };
   let avs = DB.avaliacoes;
   if (v('evalId')) avs = avs.map(a => a.id === payload.id ? payload : a);
@@ -2328,6 +2672,36 @@ function rotateTo(angle, evt) {
   updateGenderAvatar();
 }
 
+function rotateAvatarStep(direction){
+  const order = ['front','side','back'];
+  const idx = order.indexOf(currentAngle);
+  const next = order[Math.min(order.length - 1, Math.max(0, idx + direction))];
+  if(next !== currentAngle) rotateTo(next);
+}
+
+function startAvatarDrag(evt){
+  if(evt.target.closest?.('button,input,select,textarea,.hotspot,.skinfold-popover')) return;
+  avatarDrag = {active:true, startX:evt.clientX, startY:evt.clientY, moved:false};
+  g('evalStageContainer')?.classList.add('dragging');
+}
+
+function moveAvatarDrag(evt){
+  if(!avatarDrag.active) return;
+  const dx = evt.clientX - avatarDrag.startX;
+  const dy = evt.clientY - avatarDrag.startY;
+  if(Math.abs(dx) < 42 || Math.abs(dx) < Math.abs(dy) * 1.25) return;
+  avatarDrag.moved = true;
+  rotateAvatarStep(dx > 0 ? 1 : -1);
+  avatarDrag.startX = evt.clientX;
+  avatarDrag.startY = evt.clientY;
+}
+
+function endAvatarDrag(evt){
+  if(!avatarDrag.active) return;
+  avatarDrag.active = false;
+  g('evalStageContainer')?.classList.remove('dragging');
+}
+
 function switchProto(proto, evt) {
   evt?.preventDefault?.();
   activeProto = proto;
@@ -2351,6 +2725,146 @@ const skinFoldLabels = {
   dAxilar: 'Axilar Média',
   dSubescapular: 'Subescapular'
 };
+
+const posturalViews = {
+  front: {
+    title: 'Vista anterior',
+    note: 'Analise alinhamento de cabeça, cintura escapular, pelve, joelhos e pés em ortostatismo relaxado.',
+    items: [
+      ['headTilt','Inclinação/rotação de cabeça','Observar se o mento ou a linha dos olhos desviam em relação ao centro.'],
+      ['shoulderAsym','Assimetria de ombros','Comparar altura de acrômios e tensão aparente de trapézio.'],
+      ['pelvisTilt','Obliquidade pélvica','Comparar cristas ilíacas e distribuição de carga entre membros.'],
+      ['kneeValgus','Tendência a joelho valgo/varo','Observar alinhamento patela-pé e distância entre joelhos.'],
+      ['footPronation','Pronação/supinação aparente dos pés','Observar arco medial e apoio no retropé/antepé.']
+    ]
+  },
+  back: {
+    title: 'Vista posterior',
+    note: 'Analise escápulas, coluna, pelve, pregas glúteas, alinhamento de calcâneo e assimetria global.',
+    items: [
+      ['scapAsym','Assimetria escapular','Observar elevação, abdução, báscula ou escápula alada aparente.'],
+      ['spineDeviation','Desvio lateral aparente da coluna','Triagem visual para inclinação/curvatura, sem fechar diagnóstico.'],
+      ['pelvisBack','Assimetria pélvica posterior','Comparar PSIS/cristas e pregas glúteas.'],
+      ['calcaneus','Valgo/varo de calcâneo','Observar eixo do tendão de Aquiles e apoio posterior.'],
+      ['weightShift','Deslocamento de carga','Observar se o tronco/pelve descarrega mais em um lado.']
+    ]
+  },
+  right: {
+    title: 'Vista lateral direita',
+    note: 'Analise projeção da cabeça, curvaturas sagitais, pelve e alinhamento joelho-tornozelo.',
+    items: [
+      ['forwardHead','Anteriorização da cabeça','Orelha projetada à frente do acrômio sugere sobrecarga cervical.'],
+      ['kyphosis','Aumento de cifose torácica aparente','Observar arredondamento torácico e protrusão de ombros.'],
+      ['lordosis','Aumento/redução de lordose lombar','Relacionar com posição pélvica e abdômen.'],
+      ['pelvicTilt','Anteversão/retroversão pélvica aparente','Observar inclinação da pelve no plano sagital.'],
+      ['kneePosture','Recurvatum/flexo de joelho','Observar eixo lateral do joelho em relação ao tornozelo.']
+    ]
+  },
+  left: {
+    title: 'Vista lateral esquerda',
+    note: 'Compare com a lateral direita para identificar assimetrias sagitais e padrões compensatórios.',
+    items: [
+      ['forwardHead','Anteriorização da cabeça','Confirmar se a projeção cervical se repete no outro lado.'],
+      ['kyphosis','Aumento de cifose torácica aparente','Comparar contorno torácico e ombros.'],
+      ['lordosis','Aumento/redução de lordose lombar','Comparar pelve e abdômen com a lateral direita.'],
+      ['pelvicTilt','Anteversão/retroversão pélvica aparente','Observar inclinação da pelve no plano sagital.'],
+      ['kneePosture','Recurvatum/flexo de joelho','Observar eixo lateral do joelho em relação ao tornozelo.']
+    ]
+  }
+};
+let currentPosturalView = 'front';
+let posturalState = {};
+
+function getPosturalData(){
+  const data = {};
+  saveCurrentPosturalView();
+  Object.keys(posturalViews).forEach(view => {
+    data[view] = posturalState[view] || { checks:{}, obs:'' };
+    if(!data[view].checks) data[view].checks = {};
+    posturalViews[view].items.forEach(([key]) => {
+      data[view].checks[key] = !!data[view].checks[key];
+    });
+  });
+  data.report = g('posturalReport')?.value || '';
+  return data;
+}
+
+function setPosturalData(data={}){
+  posturalState = data || {};
+  Object.keys(posturalViews).forEach(view => {
+    const obs = g('posturalObs_'+view);
+    if(obs) obs.value = data?.[view]?.obs || '';
+    posturalViews[view].items.forEach(([key]) => {
+      const el = g('postural_'+view+'_'+key);
+      if(el) el.checked = !!data?.[view]?.checks?.[key];
+    });
+  });
+  if(g('posturalReport')) g('posturalReport').value = data.report || '';
+}
+
+function showPosturalTab(view='front'){
+  saveCurrentPosturalView();
+  currentPosturalView = view;
+  const cfg = posturalViews[view] || posturalViews.front;
+  document.querySelectorAll('.postural-tab').forEach(b => b.classList.toggle('active', b.dataset.posturalTab === view));
+  const body = g('posturalBody');
+  if(!body) return;
+  body.innerHTML = `
+    <div class="postural-checkgrid">
+      ${cfg.items.map(([key,label,hint]) => `
+        <label class="postural-check">
+          <input type="checkbox" id="postural_${view}_${key}" onchange="gerarRelatorioPostural()">
+          <span><b>${label}</b><span>${hint}</span></span>
+        </label>
+      `).join('')}
+    </div>
+    <div class="postural-note fg">
+      <label class="fl">Observações da ${cfg.title}</label>
+      <textarea class="fta" id="posturalObs_${view}" rows="3" oninput="gerarRelatorioPostural()" placeholder="Ex: ombro direito discretamente elevado; pelve com possível obliquidade..."></textarea>
+    </div>
+    <div class="postural-warning">Análise visual assistida: use como registro de triagem e acompanhamento. Achados relevantes, dor, alteração neurológica ou suspeita clínica exigem avaliação presencial com profissional habilitado.</div>
+  `;
+  const state = posturalState[view] || { checks:{}, obs:'' };
+  cfg.items.forEach(([key]) => {
+    const el = g('postural_'+view+'_'+key);
+    if(el) el.checked = !!state.checks?.[key];
+  });
+  const obs = g('posturalObs_'+view);
+  if(obs) obs.value = state.obs || '';
+}
+
+function gerarRelatorioPostural(){
+  saveCurrentPosturalView();
+  const parts = [];
+  Object.entries(posturalViews).forEach(([view,cfg]) => {
+    const achados = cfg.items
+      .filter(([key]) => posturalState[view]?.checks?.[key])
+      .map(([,label]) => label);
+    const obs = posturalState[view]?.obs?.trim();
+    if(achados.length || obs) {
+      parts.push(`${cfg.title}: ${achados.length ? achados.join('; ') : 'sem marcações específicas'}${obs ? '. Observação: '+obs : ''}.`);
+    }
+  });
+  const base = parts.length ? parts.join('\n') : 'Sem alterações posturais relevantes registradas nas fotos enviadas.';
+  const rel = `${base}\n\nSíntese: análise postural visual assistida por fotos, indicada para acompanhamento evolutivo. Correlacionar com anamnese, dor, mobilidade, testes funcionais e avaliação presencial quando necessário.`;
+  if(g('posturalReport')) g('posturalReport').value = rel;
+  if(g('posObs') && !g('posObs').value.trim()) g('posObs').value = rel;
+}
+
+function saveCurrentPosturalView(){
+  const view = currentPosturalView || 'front';
+  if(!posturalViews[view]) return;
+  const checks = {};
+  posturalViews[view].items.forEach(([key]) => {
+    const el = g('postural_'+view+'_'+key);
+    if(el) checks[key] = !!el.checked;
+    else if(posturalState[view]?.checks) checks[key] = !!posturalState[view].checks[key];
+  });
+  posturalState[view] = {
+    checks,
+    obs: g('posturalObs_'+view)?.value || posturalState[view]?.obs || ''
+  };
+}
 
 function hideSkinFoldPopover(){
   g('skinFoldPopover')?.classList.remove('open');
@@ -2513,8 +3027,7 @@ function updateBodyScan() {
   // ——— Morph do SVG ———
   morphBody({cintura, torax, quadril, coxa, braco:bracoD||bracoE, perna:pernaD, bf});
 
-  // ——— Linhas de conexão ———
-  drawScanLines();
+  // V5: sem linhas SVG dinâmicas para manter o scanner leve.
 }
 
 function morphBody({cintura, torax, quadril, coxa, braco, perna, bf}) {
@@ -2529,6 +3042,17 @@ function morphBody({cintura, torax, quadril, coxa, braco, perna, bf}) {
   const sCx= scaleOf(coxa, BODY_REF.coxa);       // escala coxa
   const sB = scaleOf(braco, BODY_REF.braco);     // escala braço
   const sP = scaleOf(perna, BODY_REF.perna);     // escala perna
+  const avatar = g('avatar-stage');
+  const stage = g('evalStageContainer');
+  const massFactor = clamp(((sC + sQ + sT + sCx) / 4) + (bf > 0 ? (bf - 18) / 180 : 0), 0.86, 1.18);
+  const heightFactor = clamp(1 + ((parseFloat(g('evAltura')?.value || 170) - 170) / 900), 0.94, 1.08);
+  if (avatar) {
+    avatar.style.transform = `scale(${massFactor.toFixed(3)}, ${heightFactor.toFixed(3)})`;
+  }
+  if (stage) {
+    stage.classList.toggle('morph-strong', bf > 24 || massFactor > 1.08);
+    stage.classList.toggle('morph-soft', bf > 0 && bf <= 24 && massFactor <= 1.08);
+  }
 
   // Cor do corpo baseada em % gordura
   // bf < 14: azul musculoso (#1a2d5a)
@@ -2608,6 +3132,7 @@ function morphBody({cintura, torax, quadril, coxa, braco, perna, bf}) {
 }
 
 function drawScanLines() {
+  return;
   const lyr = g('linesLayer');
   const stage = g('evalStageContainer');
   if (!lyr || !stage) return;
@@ -2668,12 +3193,64 @@ window.addEventListener('resize', () => {
   if (g('evalStageContainer')?.style.display !== 'none') drawScanLines();
 });
 
+function organizeEvalForm(){
+  const form = g('evalContentForm');
+  if(!form || form.dataset.organized === '1') return;
+  form.dataset.organized = '1';
+  form.classList.add('scanner-drawer');
+
+  const tabs = form.querySelector('.tabs');
+  const firstTitle = form.querySelector('.eval-block-title');
+  if(tabs && firstTitle) {
+    const quick = document.createElement('div');
+    quick.className = 'eval-form-quick';
+    let node = tabs.nextElementSibling;
+    while(node && node !== firstTitle) {
+      const next = node.nextElementSibling;
+      if(node.classList?.contains('frow') || node.classList?.contains('fg')) quick.appendChild(node);
+      node = next;
+    }
+    if(quick.children.length) tabs.after(quick);
+  }
+
+  const makeFold = (title, openDefault=false) => {
+    if(!title || title.closest('.eval-fold')) return;
+    const details = document.createElement('details');
+    details.className = 'eval-fold';
+    if(openDefault) details.open = true;
+    const summary = document.createElement('summary');
+    summary.textContent = title.textContent.trim();
+    const body = document.createElement('div');
+    body.className = 'eval-fold-body';
+    title.parentNode.insertBefore(details, title);
+    details.appendChild(summary);
+    details.appendChild(body);
+    let node = title.nextElementSibling;
+    title.remove();
+    while(node && !node.classList?.contains('eval-block-title') && !node.classList?.contains('eval-section-title') && !node.matches?.('[style*="justify-content:flex-end"]')) {
+      const next = node.nextElementSibling;
+      body.appendChild(node);
+      node = next;
+    }
+  };
+
+  [...form.querySelectorAll('.eval-block-title')].forEach((title, index) => {
+    const text = title.textContent.toLowerCase();
+    makeFold(title, index === 0 || text.includes('resultado'));
+  });
+  [...form.querySelectorAll('.eval-section-title')].forEach(title => makeFold(title, false));
+
+  const actionBar = [...form.children].find(el => el.getAttribute?.('style')?.includes('justify-content:flex-end'));
+  if(actionBar) actionBar.classList.add('eval-actions');
+}
+
 window.onload=function(){
   if(g('cfgPin')) {
      g('cfgPin').oninput = function() { localStorage.setItem('sm_secure_pin', this.value); };
      g('cfgPin').value = localStorage.getItem('sm_secure_pin') || '1234';
   }
   DB.pagamentos=DB.pagamentos.map(p=>{ if(p.st==='pendente'&&diff(p.vc)<0) p.st='atrasado'; return p; });
+  organizeEvalForm();
   rDash();
 }
 </script>
